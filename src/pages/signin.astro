@@ -1,0 +1,25 @@
+---
+import Main from "@/layouts/main.astro";
+---
+
+<Main title="Sign In">
+  <form action="/api/signin" method="post">
+    <label>
+      Your username:
+      <input type="text" name="username" id="username" />
+    </label>
+
+    <label>
+      Your password:
+      <input type="password" name="password" id="password" />
+    </label>
+
+    <button type="submit">Sing In</button>
+  </form>
+</Main>
+
+<style>
+  form {
+    margin-block-start: 2rem;
+  }
+</style>
