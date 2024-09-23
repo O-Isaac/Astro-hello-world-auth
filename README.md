@@ -1,14 +1,8 @@
-# Astro Starter Kit: Minimal
+# Astro Starter Kit: Minimal / Lucia Auth Implement in Astro with Astor DB
 
-```sh
-npm create astro@latest -- --template minimal
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Hi🧙‍♀️ all people who are reading this, my mission in this repository is create a auth to-do list with lucia and astro db,
+in this journey is expect to learn how make a good design database and create auth/oauth client if you want to contribute you can make a pull request
+or create a issue. Thanks for reading or contribute. 💪
 
 ## 🚀 Project Structure
 
@@ -18,8 +12,16 @@ Inside of your Astro project, you'll see the following folders and files:
 /
 ├── public/
 ├── src/
+│   ├── components/
+│   │   └── navigation.astro
+│   ├── api/
+│   │   ├── signin.ts
+│   │   ├── signup.ts
+│   │   └── signout.ts
 │   └── pages/
-│       └── index.astro
+│       ├── index.astro
+│       ├── signup.astro
+│       └── signup.astro
 └── package.json
 ```
 
@@ -44,4 +46,16 @@ All commands are run from the root of the project, from a terminal:
 
 ## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Feel free to check [our documentation](https://docs.astro.build) and [lucia documentation](https://lucia-auth.com)
+
+## 🗺️ Roadmap
+
+My roadmap of this journey is:
+
+- [x] Create auth by session.
+- [ ] Create oauth github client
+- [ ] Create a to-do list
+- [ ] Protect to-do list with auth
+- [ ] Save to-do list in database
+- [ ] Add styles with pure css or tailwind
+- [ ] Publish in vercel
