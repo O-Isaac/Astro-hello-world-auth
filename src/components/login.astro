@@ -1,0 +1,27 @@
+---
+import type { User } from "lucia";
+import LoginIcon from "@/icons/login.astro";
+import LogoutIcon from "@/icons/logout.astro";
+
+interface Props {
+  user: User | null;
+}
+
+const { user } = Astro.props;
+---
+
+{
+  user ? (
+    <form style="display: inline-block;" action="/api/signout" method="post">
+      <button class="flex items-center" type="submit">
+        <LogoutIcon className="mr-1" />
+        Cerrar Sessión
+      </button>
+    </form>
+  ) : (
+    <a class="flex items-center" href="/signin">
+      <LoginIcon className="mr-1" />
+      Iniciar Sessión
+    </a>
+  )
+}

@@ -1,20 +1,38 @@
 ---
+import Input from "@/components/ui/input.astro";
 import Main from "@/layouts/main.astro";
+import GithubIcon from "@/icons/github.astro";
 ---
 
 <Main title="Sign Up">
-  <form action="/api/signup" method="post">
-    <label>
-      Your username:
-      <input type="text" name="username" id="username" />
-    </label>
+  <form
+    class="max-w-[400px] mx-auto shadow rounded-2xl p-4 *:mx-auto"
+    action="/api/signup"
+    method="post"
+  >
+    <h2 class="px-1.5 font-bold">Sign Up</h2>
 
-    <label>
-      Your password:
-      <input type="password" name="password" id="password" />
-    </label>
+    <section class="grid gap-3 my-4">
+      <Input type="text" name="username" label="Username" maxWidth={200} />
+      <Input type="password" name="password" label="Password" maxWidth={200} />
+    </section>
 
-    <button type="submit">Sing Up</button>
+    <section class="flex *:flex-1 gap-2 items-center">
+      <button
+        type="submit"
+        class="bg-slate-800 px-4 py-1.5 rounded-lg text-white text-center font-medium hover:bg-slate-900"
+      >
+        Create account
+      </button>
+
+      <a
+        class="flex items-center gap-2 justify-center bg-slate-800 px-4 py-1.5 rounded-lg text-white text-center font-medium hover:bg-slate-900"
+        href="/api/github"
+      >
+        <GithubIcon />
+        Use Github
+      </a>
+    </section>
   </form>
 </Main>
 

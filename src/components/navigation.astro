@@ -1,42 +1,17 @@
 ---
-const user = Astro.locals.user;
+import Login from "./login.astro";
 
-console.log(user)
+const user = Astro.locals.user;
 ---
 
-<nav>
+<nav class="bg-indigo-500 text-white flex justify-around items-center p-4">
+  <section>
+    <h1>O-Isaac</h1>
+  </section>
+
+  <section class="flex items-center gap-4">
     <a href="/">Inicio</a>
     <a href="/">Contacto</a>
-
-    {
-        user ? 
-        (
-            <form style="display: inline-block;" action="/api/signout" method="post">
-                <button type="submit">Cerrar Sessión</button>
-            </form>
-        ) : 
-        (
-            <a href="/signin">Iniciar Sessión</a>
-            <a href="/api/github">Iniciar Sessión en Github</a>
-            <a href="/signup">Crear Cuenta</a>
-        )
-    }
+    <Login user={user} />
+  </section>
 </nav>
-
-
-<style>
-    a {
-        color: black;
-        text-decoration: none;
-        border: 1px solid rgba(65, 125, 235, 0.5);
-        border-radius: 0.365rem;
-        padding: 0.365rem 0.852rem;
-        background: rgba(100, 150, 243, 0.5);
-        color: rgb(24, 35, 56);
-    }
-
-    a:hover {
-        background: rgba(100, 150, 243, 0.8);
-
-    }
-</style>

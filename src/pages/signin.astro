@@ -1,25 +1,40 @@
 ---
+import Button from "@/components/ui/button.astro";
+import Input from "@/components/ui/input.astro";
+import Login from "@/icons/login.astro";
 import Main from "@/layouts/main.astro";
 ---
 
 <Main title="Sign In">
-  <form action="/api/signin" method="post">
-    <label>
-      Your username:
-      <input type="text" name="username" id="username" />
-    </label>
+  <form
+    class="max-w-[400px] mx-auto shadow rounded-2xl p-4 *:mx-auto"
+    action="/api/signin"
+    method="post"
+  >
+    <h2 class="px-1.5 font-bold">Sign In</h2>
 
-    <label>
-      Your password:
-      <input type="password" name="password" id="password" />
-    </label>
+    <section class="grid gap-3 my-4">
+      <Input type="text" name="username" label="Username" maxWidth={200} />
+      <Input type="password" name="password" label="Password" maxWidth={200} />
+    </section>
 
-    <button type="submit">Sing In</button>
+    <section class="flex *:flex-1 gap-2 items-center">
+      <button
+        type="submit"
+        class="bg-slate-800 px-4 py-1.5 rounded-lg text-white text-center font-medium hover:bg-slate-900"
+      >
+        Sign In
+      </button>
+      <a
+        class="bg-slate-800 px-4 py-1.5 rounded-lg text-white text-center font-medium hover:bg-slate-900"
+        href="/signup">Sign Up</a
+      >
+    </section>
   </form>
 </Main>
 
 <style>
   form {
-    margin-block-start: 2rem;
+    margin-block: 2rem;
   }
 </style>
