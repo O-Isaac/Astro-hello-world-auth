@@ -9,20 +9,49 @@ or create a issue. Thanks for reading or contribute. 💪
 Inside of your Astro project, you'll see the following folders and files:
 
 ```text
-/
-├── public/
-├── src/
-│   ├── components/
-│   │   └── navigation.astro
-│   ├── api/
-│   │   ├── signin.ts
-│   │   ├── signup.ts
-│   │   └── signout.ts
-│   └── pages/
-│       ├── index.astro
-│       ├── signup.astro
-│       └── signup.astro
-└── package.json
+astro-ies-docs,
+├─ astro.config.mjs,
+├─ db,
+│  ├─ config.ts,
+│  └─ seed.ts,
+├─ package-lock.json,
+├─ package.json,
+├─ public,
+│  └─ favicon.svg,
+├─ README.md,
+├─ src,
+│  ├─ auth.ts,
+│  ├─ components,
+│  │  ├─ login.astro,
+│  │  ├─ navigation.astro,
+│  │  └─ ui,
+│  │     ├─ button.astro,
+│  │     └─ input.astro,
+│  ├─ env.d.ts,
+│  ├─ icons,
+│  │  ├─ github.astro,
+│  │  ├─ login.astro,
+│  │  └─ logout.astro,
+│  ├─ layouts,
+│  │  └─ main.astro,
+│  ├─ middleware.ts,
+│  ├─ pages,
+│  │  ├─ api,
+│  │  │  ├─ callbacks,
+│  │  │  │  └─ github.ts,
+│  │  │  ├─ github.ts,
+│  │  │  ├─ signin.ts,
+│  │  │  ├─ signout.ts,
+│  │  │  └─ signup.ts,
+│  │  ├─ index.astro,
+│  │  ├─ signin.astro,
+│  │  └─ signup.astro,
+│  ├─ repository,
+│  │  └─ user.ts,
+│  ├─ utils.ts,
+│  └─ validations.ts,
+├─ tailwind.config.mjs,
+└─ tsconfig.json,
 ```
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
