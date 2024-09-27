@@ -82,9 +82,9 @@ Feel free to check [our documentation](https://docs.astro.build) and [lucia docu
 My roadmap of this journey is:
 
 - [x] Create auth by session.
-- [ ] Create oauth github client
-- [ ] Create a to-do list
-- [ ] Protect to-do list with auth
-- [ ] Save to-do list in database
-- [ ] Add styles with pure css or tailwind
+- [x] Create oauth github client
+- [x] Add styles with pure css or tailwind
+- [ ] Create social network
+- [ ] Create profile
+- [ ] Create posts
 - [ ] Publish in vercel
