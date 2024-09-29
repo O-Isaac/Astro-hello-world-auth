@@ -3,12 +3,13 @@ import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 
 import type { APIContext } from "astro";
-import { User, db, eq } from "astro:db";
+import { User, db, eq, Github } from "astro:db";
 
 export async function GET(context: APIContext): Promise<Response> {
   const code = context.url.searchParams.get("code");
   const state = context.url.searchParams.get("state");
   const storedState = context.cookies.get("github_oauth_state")?.value ?? null;
+
   if (!code || !state || !storedState || state !== storedState) {
     return new Response(null, {
       status: 400,
@@ -23,9 +24,6 @@ export async function GET(context: APIContext): Promise<Response> {
       },
     });
     const githubUser: GitHubUser = await githubUserResponse.json();
-
-    // Replace this with your own DB client.
-    // const existingUser = await db.table("user").where("github_id", "=", githubUser.id).get();
     const existingUser = await db
       .select()
       .from(User)
@@ -48,6 +46,12 @@ export async function GET(context: APIContext): Promise<Response> {
     await db.insert(User).values({
       id: userId,
       github_id: githubUser.id,
+      username: githubUser.login,
+    });
+
+    await db.insert(Github).values({
+      id: githubUser.id,
+      avatar: githubUser.avatar_url,
       username: githubUser.login,
     });
 
@@ -76,4 +80,5 @@ export async function GET(context: APIContext): Promise<Response> {
 interface GitHubUser {
   id: string;
   login: string;
+  avatar_url: string;
 }
