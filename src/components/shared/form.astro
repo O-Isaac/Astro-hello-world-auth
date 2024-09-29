@@ -15,7 +15,7 @@ const { action, description, method, title, createAccount } = Astro.props;
   {description}
 </p>
 
-<form action={action} method={method}>
+<form class="[&>input]:text-black" action={action} method={method}>
   <label class="block font-medium mb-4" for="name">Your username</label>
   <input
     class="block w-full border shadow rounded-lg px-4 py-2"
@@ -46,7 +46,7 @@ const { action, description, method, title, createAccount } = Astro.props;
   createAccount && (
     <p class="text-neutral-500 text-center mt-6">
       No registered?{" "}
-      <a class="font-medium text-black" href="/signup">
+      <a class="font-medium text-white" href="/signup">
         Create Account
       </a>
     </p>
