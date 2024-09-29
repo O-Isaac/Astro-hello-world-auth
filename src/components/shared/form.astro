@@ -1,0 +1,54 @@
+---
+interface Props {
+  method: HTMLFormElement["method"];
+  action: string;
+  title: string;
+  description: string;
+  createAccount?: boolean;
+}
+
+const { action, description, method, title, createAccount } = Astro.props;
+---
+
+<h3 class="text-center font-bold text-3xl leading-normal">{title}</h3>
+<p class="text-center text-sm leading-normal text-neutral-500 mb-12">
+  {description}
+</p>
+
+<form action={action} method={method}>
+  <label class="block font-medium mb-4" for="name">Your username</label>
+  <input
+    class="block w-full border shadow rounded-lg px-4 py-2"
+    type="text"
+    name="username"
+    id="username"
+    placeholder="john doe"
+  />
+  <label class="block font-medium my-4" for="name">Your password</label>
+  <input
+    class="block w-full border shadow rounded-lg px-4 py-2"
+    type="password"
+    name="password"
+    id="password"
+    placeholder="******"
+  />
+
+  <button
+    type="submit"
+    class="my-8 bg-black text-white p-3 w-full rounded-lg hover:shadow-lg transition-shadow font-bold uppercase text-sm"
+    >{title}</button
+  >
+</form>
+
+<slot />
+
+{
+  createAccount && (
+    <p class="text-neutral-500 text-center mt-6">
+      No registered?{" "}
+      <a class="font-medium text-black" href="/signup">
+        Create Account
+      </a>
+    </p>
+  )
+}

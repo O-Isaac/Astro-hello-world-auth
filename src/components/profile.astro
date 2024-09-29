@@ -1,0 +1,30 @@
+---
+import { db, eq, Github } from "astro:db";
+import type { User } from "lucia";
+
+interface Props {
+  user: User;
+}
+
+const githubId = Astro.props.user.githubId.toString();
+const user = await db
+  .select()
+  .from(Github)
+  .where(eq(Github.id, githubId))
+  .get();
+---
+
+<section class="flex items-center gap-2">
+  <a href={`https://github.com/${user?.username}`}>
+    <img
+      class="size-10 border border-indigo-600 rounded-full"
+      src={user?.avatar}
+      alt={user?.username}
+    />
+  </a>
+  <div class="grid items-center">
+    <form action="/api/signout" method="post">
+      <button class="font-medium">Sign Out</button>
+    </form>
+  </div>
+</section>
