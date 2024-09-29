@@ -5,6 +5,8 @@ const User = defineTable({
     id: column.text({ primaryKey: true, unique: true, optional: false }),
     username: column.text({ unique: true, optional: false }),
     password: column.text({ optional: true }),
+    avatar: column.text({ optional: true }),
+    public: column.boolean({ optional: true }),
     github_id: column.text({ optional: true, unique: true }),
   },
 });
