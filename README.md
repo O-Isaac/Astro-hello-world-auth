@@ -8,7 +8,7 @@ or create a issue. Thanks for reading or contribute. 💪
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```text
+```
 astro-ies-docs,
 ├─ astro.config.mjs,
 ├─ db,
@@ -22,8 +22,17 @@ astro-ies-docs,
 ├─ src,
 │  ├─ auth.ts,
 │  ├─ components,
+│  │  ├─ client,
+│  │  │  ├─ meteors.tsx,
+│  │  │  └─ stars.tsx,
 │  │  ├─ login.astro,
 │  │  ├─ navigation.astro,
+│  │  ├─ profile,
+│  │  │  ├─ github_profile.astro,
+│  │  │  └─ username.astro,
+│  │  ├─ profile.astro,
+│  │  ├─ shared,
+│  │  │  └─ form.astro,
 │  │  └─ ui,
 │  │     ├─ button.astro,
 │  │     └─ input.astro,
@@ -34,6 +43,8 @@ astro-ies-docs,
 │  │  └─ logout.astro,
 │  ├─ layouts,
 │  │  └─ main.astro,
+│  ├─ lib,
+│  │  └─ utils.ts,
 │  ├─ middleware.ts,
 │  ├─ pages,
 │  │  ├─ api,
@@ -47,11 +58,13 @@ astro-ies-docs,
 │  │  ├─ signin.astro,
 │  │  └─ signup.astro,
 │  ├─ repository,
+│  │  ├─ github.ts,
 │  │  └─ user.ts,
 │  ├─ utils.ts,
 │  └─ validations.ts,
 ├─ tailwind.config.mjs,
 └─ tsconfig.json,
+
 ```
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
