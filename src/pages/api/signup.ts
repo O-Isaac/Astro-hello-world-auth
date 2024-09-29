@@ -1,4 +1,5 @@
 import { lucia } from "@/auth";
+import { RestResponse } from "@/utils";
 import { userSchema } from "@/validations";
 import type { APIContext } from "astro";
 import { User, db } from "astro:db";
@@ -7,6 +8,8 @@ import { Argon2id } from "oslo/password";
 import { ZodError } from "zod";
 
 export async function POST(context: APIContext): Promise<Response> {
+  const restResponse = new RestResponse({ message: "ok", status: 200 });
+
   try {
     const formData = await context.request.formData();
     const formDataObject = Object.fromEntries(formData);
@@ -30,8 +33,17 @@ export async function POST(context: APIContext): Promise<Response> {
       sessionCookie.attributes
     );
 
-    return context.redirect("/");
+    return restResponse.rest;
   } catch (error) {
-    return context.redirect("/");
+    if (error instanceof ZodError) {
+      restResponse.setMessage("Bad Request");
+      restResponse.setStatus(400);
+      restResponse.setResponse(error.issues);
+    } else {
+      restResponse.setMessage("Internal Server Error");
+      restResponse.setStatus(500);
+    }
+
+    return restResponse.rest;
   }
 }
