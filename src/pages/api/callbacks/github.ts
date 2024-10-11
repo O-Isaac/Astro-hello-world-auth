@@ -3,7 +3,7 @@ import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 
 import type { APIContext } from "astro";
-import { User, db, eq, Github } from "astro:db";
+import { User, db, eq } from "astro:db";
 
 export async function GET(context: APIContext): Promise<Response> {
   const code = context.url.searchParams.get("code");
@@ -47,12 +47,7 @@ export async function GET(context: APIContext): Promise<Response> {
       id: userId,
       github_id: githubUser.id,
       username: githubUser.login,
-    });
-
-    await db.insert(Github).values({
-      id: githubUser.id,
       avatar: githubUser.avatar_url,
-      username: githubUser.login,
     });
 
     const session = await lucia.createSession(userId, {});
@@ -64,13 +59,14 @@ export async function GET(context: APIContext): Promise<Response> {
     );
     return context.redirect("/");
   } catch (e) {
-    // the specific error message depends on the provider
     if (e instanceof OAuth2RequestError) {
-      // invalid code
       return new Response(null, {
         status: 400,
       });
     }
+
+    console.log(e);
+
     return new Response(null, {
       status: 500,
     });

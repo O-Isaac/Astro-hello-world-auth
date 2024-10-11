@@ -1,5 +1,6 @@
 import { lucia } from "@/auth";
 import UserRepository from "@/repository/user";
+import { RestResponse } from "@/utils";
 import { userSchema } from "@/validations";
 import type { APIContext } from "astro";
 import { Argon2id } from "oslo/password";
@@ -8,6 +9,8 @@ import { ZodError } from "zod";
 const userRepository = new UserRepository();
 
 export async function POST(context: APIContext): Promise<Response> {
+  const response = new RestResponse({ status: 200, message: "ok" });
+
   try {
     const formData = await context.request.formData();
     const formDataObj = Object.fromEntries(formData);
@@ -16,11 +19,15 @@ export async function POST(context: APIContext): Promise<Response> {
     const matchedUser = await userRepository.getUserByUsername(username);
 
     if (!matchedUser) {
-      return new Response("Incorrect Username or password", { status: 400 });
+      response.setStatus(400);
+      response.setMessage("Incorrect Username or password");
+      return response.rest;
     }
 
     if (!matchedUser.password) {
-      return new Response("Invalid password", { status: 400 });
+      response.setStatus(400);
+      response.setMessage("Invalid password");
+      return response.rest;
     }
 
     const isValidPassword = await new Argon2id().verify(
@@ -29,7 +36,9 @@ export async function POST(context: APIContext): Promise<Response> {
     );
 
     if (!isValidPassword) {
-      return new Response("Incorrect Username or password", { status: 400 });
+      response.setStatus(400);
+      response.setMessage("Incorrect Username or password");
+      return response.rest;
     }
 
     const session = await lucia.createSession(matchedUser.id, {});
@@ -40,12 +49,18 @@ export async function POST(context: APIContext): Promise<Response> {
       cookieSession.value,
       cookieSession.attributes
     );
-    return context.redirect("/");
+
+    return response.rest;
   } catch (error) {
     if (error instanceof ZodError) {
-      console.log(error.issues);
+      response.setStatus(400);
+      response.setResponse(error.issues);
+      response.setMessage("Bad Request");
+    } else {
+      response.setStatus(500);
+      response.setMessage("Internal Server Error");
     }
 
-    return context.redirect(context.request.url);
+    return response.rest;
   }
 }

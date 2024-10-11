@@ -1,0 +1,18 @@
+---
+import MeteorsHeader from "@/components/meteors-header.astro";
+import Main from "@/layouts/main.astro";
+import UserRepository from "@/repository/user";
+
+const userId = Astro.locals.user?.id;
+
+if (!userId) return Astro.redirect("/");
+
+const userRepository = new UserRepository();
+const user = await userRepository.getUser(userId);
+
+console.log(user);
+---
+
+<Main title="Profile">
+  <MeteorsHeader />
+</Main>

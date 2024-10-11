@@ -1,12 +1,9 @@
 ---
-import StarryBackground from "@/components/client/stars";
 import Main from "../layouts/main.astro";
-import { Meteors } from "@/components/client/meteors";
+import MeteorsHeader from "@/components/meteors-header.astro";
 ---
 
 <Main title="Home">
-  <section class="max-h-96 h-[400px] relative overflow-hidden">
-    <Meteors client:load number={6} />
-    <StarryBackground numStars={50} />
-  </section>
+  <MeteorsHeader />
+  Home
 </Main>

@@ -2,19 +2,42 @@
 import SharedLoginForm from "@/components/shared/form.astro";
 import Github from "@/icons/github.astro";
 import Main from "@/layouts/main.astro";
+import LoginUtils from "@/lib/login";
+
+const alert = { message: "" };
+
+if (Astro.request.method === "POST") {
+  const loginUtils = new LoginUtils(Astro.request, Astro.response);
+  const [loginRequest, loginCookies] = await loginUtils.signIn();
+
+  if (loginRequest.status !== 200) {
+    alert.message = loginRequest.response
+      ? loginUtils.createErrorMessage(loginRequest.response)
+      : loginRequest.message;
+  } else {
+    loginUtils.redirectTo(loginCookies, "/profile");
+  }
+}
 ---
 
 <Main title="Sign In">
+  {
+    alert.message && (
+      <section class="p-4 w-full bg-red-500">
+        <p class="first-letter:capitalize">{alert.message}</p>
+      </section>
+    )
+  }
+
   <section class="max-w-[55ch] mx-auto p-8">
     <SharedLoginForm
-      action="/api/signin"
       title="Sign In"
       description="Enter username and password to sign in."
       method="post"
       createAccount
     >
       <a
-        class="flex items-center border border-white p-2 rounded-lg justify-center font-medium"
+        class="flex items-center border border-white hover:bg-white hover:text-black transition-colors p-2 rounded-lg justify-center font-medium"
         href="/api/github"
       >
         <Github class="mr-2" />
