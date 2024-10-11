@@ -1,0 +1,9 @@
+---
+import { Meteors } from "./client/meteors";
+import StarryBackground from "./client/stars";
+---
+
+<section class="max-h-96 h-[400px] relative overflow-hidden">
+  <Meteors client:load number={6} />
+  <StarryBackground numStars={50} />
+</section>
