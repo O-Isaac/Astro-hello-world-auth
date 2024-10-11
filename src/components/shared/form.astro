@@ -1,7 +1,7 @@
 ---
 interface Props {
   method: HTMLFormElement["method"];
-  action: string;
+  action?: string;
   title: string;
   description: string;
   createAccount?: boolean;
@@ -11,17 +11,24 @@ const { action, description, method, title, createAccount } = Astro.props;
 ---
 
 <h3 class="text-center font-bold text-3xl leading-normal">{title}</h3>
+
 <p class="text-center text-sm leading-normal text-neutral-500 mb-12">
   {description}
 </p>
 
-<form class="[&>input]:text-black" action={action} method={method}>
+<form
+  id="form-auth"
+  class="[&>input]:text-black"
+  action={action}
+  method={method}
+>
   <label class="block font-medium mb-4" for="name">Your username</label>
   <input
     class="block w-full border shadow rounded-lg px-4 py-2"
     type="text"
     name="username"
     id="username"
+    required
     placeholder="john doe"
   />
   <label class="block font-medium my-4" for="name">Your password</label>
@@ -29,13 +36,14 @@ const { action, description, method, title, createAccount } = Astro.props;
     class="block w-full border shadow rounded-lg px-4 py-2"
     type="password"
     name="password"
+    required
     id="password"
     placeholder="******"
   />
 
   <button
     type="submit"
-    class="my-8 bg-black text-white p-3 w-full rounded-lg hover:shadow-lg transition-shadow font-bold uppercase text-sm"
+    class="my-8 bg-slate-700 hover:bg-slate-800 text-white p-3 w-full rounded-lg hover:shadow-lg transition-all font-bold uppercase text-sm"
     >{title}</button
   >
 </form>
