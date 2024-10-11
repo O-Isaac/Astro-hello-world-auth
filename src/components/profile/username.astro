@@ -13,7 +13,7 @@ const user = await userRepository.getUser(Astro.props.user.id);
 <section class="flex items-center gap-2">
   {
     user?.avatar ? (
-      <img src={user.avatar} alt={user.username} />
+      <img class="size-10 rounded-full" src={user.avatar} alt={user.username} />
     ) : (
       <figure class="size-10 rounded-full bg-neutral-600" />
     )
